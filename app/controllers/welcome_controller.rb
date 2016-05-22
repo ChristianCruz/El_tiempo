@@ -2,7 +2,7 @@ class WelcomeController < ApplicationController
   def index
   @states = %w(HI AK CA OR WA ID UT NV AZ NM CO WY MT ND SD NB KS OK TX LA AR MO IA MN WI IL IN MI OH KY TN MS AL GA FL SC NC VA WV DE MD PA NY NJ CT RI MA VT NH ME DC).sort!
 
-  response = HTTParty.get("http://api.wunderground.com/api/#{Figaro.env.wunderground_api_key}/geolookup/conditions/q/OK/Tulsa.json")
+  response = HTTParty.get("http://api.wunderground.com/api/#{Figaro.env.wunderground_api_key}/geolookup/conditions/q/NY/New_York.json")
 
   if params[:city] != nil
     params[:city].gsub!(" ", "_")
@@ -38,7 +38,5 @@ class WelcomeController < ApplicationController
 
 end
 
-  def about
-  end
 
 end
