@@ -5,10 +5,72 @@
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href='https://fonts.googleapis.com/css?family=Nova+Square' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Titillium+Web:400,200,600,700' rel='stylesheet' type='text/css'>
 </head>
 <body>
+<div id="wrapper">
 
-<%= yield %>
+        <!-- Sidebar -->
+        <div id="sidebar-wrapper">
+        
+            <ul class="sidebar-nav">
+                <li class="sidebar-brand">
+                  <%= image_tag "tiempo_icon.svg", width: "100", height: "100", class: "tiempo_icon img-circle" %>
+                </li>
+                <div class="col-md-12">
+                  <h4>Forecast your local weather like a mayan priest.</h4>
+                  </div>
+                <li>
+                    <%= form_tag index_path do %>
+                      <div class="col-md-12">
+                        <%=  text_field_tag :city, nil, placeholder: "Enter city name", class: "form-control" %><br>
+                        <%= select_tag :state, options_for_select(@states),
+                                       :prompt => "Select the state",
+                                       class: "form-control" %><br>
+                        <%= submit_tag "Predict Weather", class: "btn btn-primary  check-btn btn-block" %>
+                      </div>
+                    <% end %>
+                </li>
+                
+                <% if @location != nil %>
+                  <div class="col-md-12 ">
+                    <h4>Forecast for <%= @location %>:</h4>
+                    <p><em>What's the weather like?</em></p>
+                    <p>Temperature is: <%= @temp_f %>° F / <%= @temp_c %>° C</p>
+                    <p>
+                      Feels like: <%= @real_feel_f %>° F / <%= @real_feel_c %>° C
+                    </p>
+                    <p><small class="weather-words"><%= @weather_words %></small> <%= image_tag @weather_icon, class: "weather_icon img-circle pull-left ", width: "45", height: "45" %></p>
+                    <small>
+                      <strong><%=  link_to "Full Forecast >", @forecast_link, target: "_blank", class: "full-for" %></strong>
+                    </small>
+                  </div>
+                <% end %>
+            </ul>            
+        </div>
+        <!-- /#sidebar-wrapper -->
+
+        <!-- Page Content -->
+        <div id="page-content-wrapper">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <a href="#menu-toggle" class="btn btn-default pull-right menu-hamburger" id="menu-toggle"><span class="glyphicon glyphicon glyphicon-menu-hamburger" aria-hidden="true"></span></a>
+                        <%= yield %>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /#page-content-wrapper -->
+
+    </div>
+    <!-- /#wrapper -->
+
+
 
 </body>
 </html>

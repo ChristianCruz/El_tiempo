@@ -1,0 +1,20 @@
+<style>
+  body {
+    background: url(<%= @url %>) no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;;
+  }
+</style>
+<div class="row">
+<small class="forecast">
+  The forecast for <%= @location %> is <i><%= @weather_words %>!</i>
+</small>
+
+<div class="time">
+<p><small class="pull-left timibiris">TIME</small></p>
+<h1>
+  <%= Time.now.strftime("%H:%M:%S") %>
+</h1>
+</div>
